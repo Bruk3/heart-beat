@@ -1,0 +1,114 @@
+{% extends 'music/base.html' %}
+{% if recommended_songs %}
+    {% block recommended_active %}{{ recommended_songs }}{% endblock %}
+{% endif %}
+{% if favorite_songs %}
+    {% block favorites_active %}{{ favorite_songs }}{% endblock %}
+{% endif %}
+{% if pushed_songs %}
+    {% block pushed_songs_active %}{{ pushed_songs }}{% endblock %}
+{% endif %}
+{% if push_songs %}
+    {% block push_songs_active %}{{ push_songs }}{% endblock %}
+{% endif %}
+
+
+
+
+{% block body %}
+
+<div class="songs-container container">
+
+{#    Songs#}
+{% if success_message %}
+        <p onload="alert_success(success_message)"></p>
+{% endif %}
+    <div class="row">
+        {% for song in songs %}
+            <div class="col-offset-xs-1 col-xs-10   col-sm-6 col-lg-4 col-md-4 box-container">
+                <div class="thumbnail">
+                    <div class="embed-responsive embed-responsive-4by3">
+                        <iframe class="embed-responsive-item" src={{ song.source }}
+                                name="iframe{{ song.id }}"></iframe>
+                    </div>
+                    <div class="caption" style="color:#2f2f2f;">
+                        <h4>{{ song.title }}</h4>
+                        <h5>{{ song.artist }}</h5>
+
+                        <! -- View Details -->
+
+                        <div id="detail{{ song.id }}" style="display: none; color:white;">
+                            <p>Recommended by: {{ song.user }}</p>
+                            <p>Description: {{ song.description }}</p>
+                        </div>
+                            <button id="id_detailsBtn{{ song.id }}"  class="btn btn-primary btn-sm" onclick="showDetails({{ song.id }})">View Details</button>
+                            <button id="id_lessBtn{{ song.id }}" class ="btn btn-primary btn-sm" onclick="showLess({{ song.id }})" style="display:none;">Show Less</button>
+
+                      <form action="{% url "music:make_favorite" song.id %}" method="post" style="display:inline">
+                            {% csrf_token %}
+                            <input type="hidden" name="songs" value="{{ songs }}" />
+                            <button type = "submit" class="btn btn-default btn-sm btn-favorite"><span class="glyphicon glyphicon-star
+                               {% if song.is_favorite %}active{% endif %}"></span></button>
+
+                        </form>
+                        <!-- Delete Album -->
+                    <button type="button" class="btn btn-default btn-sm" data-toggle="collapse" data-target="#id_delete{{ song.id }}">
+                        <span class="glyphicon glyphicon-trash"></span></button>
+                        <div id="id_delete{{ song.id }}" class="collapse" >
+                            <form  action="{% url "music:delete" song.id  %}" method="post" style="display:inline">
+                            {% csrf_token %}
+                                <p style="color:#fff"> Are you sure you want to delete this song?</p>
+                                <button type="submit" class="btn btn-danger">Yes</button>
+                                <button type="button" class="btn btn-warning" data-toggle="collapse" style="display:inline;" data-target="#id_delete{{ song.id }}">Cancel</button>
+
+                             </form>
+                        </div>
+
+
+                        <!-- Favorite Album -->
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+        {% endfor %}
+
+    </div>
+</div>
+
+
+
+<script>
+    function showDetails(id){
+       var detail_id = "detail"+id;
+        var less_button = "id_lessBtn"+id;
+        var details_button = "id_detailsBtn" +id;
+        document.getElementById(details_button).style.display="none";
+        document.getElementById(detail_id).style.display = "inline";
+        document.getElementById(less_button).style.display="inline";
+
+    }
+    function showLess(id){
+        var detail_id = "detail"+id;
+        var less_button = "id_lessBtn"+id;
+        var details_button = "id_detailsBtn" +id;
+        document.getElementById(detail_id).style.display="none";
+        document.getElementById(less_button).style.display="none";
+        document.getElementById(details_button).style.display="inline";
+
+    }
+
+    function alert_success(success_message){
+            alert(success_message)
+        }
+
+
+
+</script>
+
+{% endblock %}

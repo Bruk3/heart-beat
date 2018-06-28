@@ -1,0 +1,60 @@
+{% extends 'music/base.html' %}
+{% block title %}Push a new song{% endblock %}
+{% block push_song_active %}active{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-sm-12 col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Recommend a new Song</h3>
+                    {% if error_message %}
+                        <p class="text-danger"><strong><small>{{ error_message }}</small></strong></p>
+                    {% endif %}
+                    {% if success_message %}
+                        <p class="text-success"><strong><small>{{ success_message }}</small></strong></p>
+                    {% endif %}
+                    <form class="form-horizontal" role="form" action="" method="post">
+                        {% csrf_token %}
+                        {% include 'music/form_template.html' %}
+{#                        <div class="form-group">#}
+{#                            <input type="hidden" name="user" value="{% request.user %}">#}
+{#                        </div>#}
+                        <div class="form-group" style="display:inline;">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">{{ button }}</button>
+                            </div>
+                        </div>
+
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>What is Heart Beat?</h3>
+                    <p>Heart Beat is an app that allows you to push your favorite music to your friends on the cloud.</p>
+                    <h3>How do I add music?</h3>
+                    <p>First, create a new album by filling out the form on this page. Once an album is created you will be able to add/upload songs.</p>
+                    <h3>What are some Album logo best practices?</h3>
+                    <ul>
+                        <li>Have a resolution of 512x512</li>
+                        <li>Use common image formats such as .JPG, .GIF, or .PNG</li>
+                        <li>Remain under the 2MB limit.</li>
+                        <li>Square images look best</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

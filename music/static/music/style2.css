@@ -1,0 +1,77 @@
+.landing-page{
+    background: url(images/background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment:fixed;
+}
+
+
+.logo-pic{
+    width:20%;
+    height:40px;
+}
+
+.logo-text{
+    color:navajowhite;
+    font-family: cursive;
+}
+
+.nav-text{
+    color:white;
+}
+
+.nav-link:hover{
+    background:rgba(0,0,0,1)
+}
+
+.navbar-brand{
+    font-family:'Satisfy', cursive;
+    text-em:#ffff00;
+    background-color:black;
+    font-size:110%;
+}
+
+.login-page{
+    background: url(images/turntable-disk.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachement:fixed;
+
+}
+.glyphicon-headphones{
+    color:red;
+}
+
+.glyphicon-star.active{
+    color: #FDB230;
+}
+
+a.active{
+    background-color:red;
+    color:red;
+}
+
+a.active:hover{
+    background-color:blue;
+    color:blue;
+}
+
+.thumbnail{
+    background-color:gray;
+}
+
+#id_login{
+    border:0px;
+    background:rgba(0,0,0,0.5);
+    color: #ffffff;
+    text-align:center;
+    margin-top:25%;
+    padding-top:50px;
+    position:relative;
+}
+#id_login:hover{
+    background:rgba(0,0,0,0.7)
+}
+.mypanel{
+    background-color:blue;
+}
